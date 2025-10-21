@@ -5,18 +5,13 @@
  */
 
 const thirdMax = (nums) => {
-  let firstMax;
-  let thirdMax;
+  let firstMax, thirdMax;
+  let newNums = [...nums];
   for (let i = 0; i < 3; i++) {
-    thirdMax = nums[0];
-    for (let num of nums) {
-      thirdMax > num ? thirdMax : (thirdMax = num);
-    }
-    const newNums = nums.filter((num) => num !== thirdMax);
-    nums = newNums;
-    if (i === 0) {
-      firstMax = thirdMax;
-    }
+    thirdMax = newNums[0];
+    for (const num of newNums) thirdMax > num ? thirdMax : (thirdMax = num);
+    newNums = newNums.filter((num) => num !== thirdMax);
+    if (i === 0) firstMax = thirdMax;
   }
   return thirdMax || thirdMax === 0 ? thirdMax : firstMax;
 };
