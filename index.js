@@ -5,31 +5,20 @@
  */
 
 const thirdMax = (nums) => {
- // write your code here
- let first = -Infinity;
- let second = -Infinity;
- let third = -Infinity;
-
- for (let num of nums) {
-   // Skip duplicates
-   if (num === first || num === second || num === third) {
-     continue;
-   }
-
-   if (num > first) {
-     third = second;
-     second = first;
-     first = num;
-   } else if (num > second) {
-     third = second;
-     second = num;
-   } else if (num > third) {
-     third = num;
-   }
- }
-
- // If third max exists, return it; otherwise return first max
- return third === -Infinity ? first : third;
+  let firstMax;
+  let thirdMax;
+  for (let i = 0; i < 3; i++) {
+    thirdMax = nums[0];
+    for (let num of nums) {
+      thirdMax > num ? thirdMax : (thirdMax = num);
+    }
+    const newNums = nums.filter((num) => num !== thirdMax);
+    nums = newNums;
+    if (i === 0) {
+      firstMax = thirdMax;
+    }
+  }
+  return thirdMax || thirdMax === 0 ? thirdMax : firstMax;
 };
 
 // Export the function for testing
